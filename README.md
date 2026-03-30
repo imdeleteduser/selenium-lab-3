@@ -80,12 +80,12 @@ Isolates the smallest testable piece — the billing calculation function — an
 
 |TC ID|Description                  |Input             |Expected Output       |Status|
 |-----|-----------------------------|------------------|----------------------|------|
-|TC01 |Standard bill with 5% tax    |Base=1000, Tax=5% |Total=1050            |✅ PASS|
-|TC02 |Wrong tax rate (18%) applied |Base=1000, Tax=18%|Total=1050 (bug: 1180)|❌ FAIL|
-|TC03 |Zero tax for exempted patient|Base=500, Tax=0%  |Total=500             |✅ PASS|
-|TC04 |Negative base amount         |Base=-100, Tax=5% |Error / 0             |✅ PASS|
-|TC05 |Null/missing tax rate        |Base=800, Tax=null|Error raised          |✅ PASS|
-|TC06 |Large bill amount            |Base=99999, Tax=5%|Total=104998.95       |✅ PASS|
+|TC01 |Standard bill with 5% tax    |Base=1000, Tax=5% |Total=1050            |PASS|
+|TC02 |Wrong tax rate (18%) applied |Base=1000, Tax=18%|Total=1050 (bug: 1180)|FAIL|
+|TC03 |Zero tax for exempted patient|Base=500, Tax=0%  |Total=500             |PASS|
+|TC04 |Negative base amount         |Base=-100, Tax=5% |Error / 0             |PASS|
+|TC05 |Null/missing tax rate        |Base=800, Tax=null|Error raised          |PASS|
+|TC06 |Large bill amount            |Base=99999, Tax=5%|Total=104998.95       |PASS|
 
 -----
 
@@ -145,7 +145,7 @@ def test_null_tax_raises():
 |Steps to Reproduce|Call `calculate_bill(1000)` → Expected 1050, Got 1180   |
 |Root Cause        |`TAX_RATE` changed to 0.18 during update instead of 0.05|
 |Fix Applied       |Reverted `TAX_RATE = 0.05`; added config validation     |
-|Status            |✅ Fixed – Verified                                      |
+|Status            |Fixed – Verified                                      |
 
 -----
 
